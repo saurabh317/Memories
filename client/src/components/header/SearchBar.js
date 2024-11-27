@@ -1,21 +1,35 @@
 import React, { useState } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
+import { debounced } from '../../common/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCachedSearchTerm } from '../../store/post';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
+  const dispatch = useDispatch()
   const [searchTerm, setSearchTerm] = useState('');
+  const cachedSearchTerm = useSelector(({ posts }) => posts.searchTerm)
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const onSearch = () => {
+    dispatch(setCachedSearchTerm(searchTerm))
+    if(cachedSearchTerm === searchTerm) return
+    
+    // send a post req to the backend for searching based on the params
+  }
 
   const handleClearSearch = () => {
     setSearchTerm('');
     onSearch('');
   };
 
+  const debouncedTrigger = debounced(onSearch, 1000)
+
   const handleSearch = (event) => {
     event.preventDefault();
-    onSearch(searchTerm);
+    debouncedTrigger()
   };
 
   return (

@@ -83,6 +83,7 @@ const postSlice = createSlice({
 
   initialState: {
     allPosts: [],
+    searchTerm: '',
     createPostInProgress: false
   },
 
@@ -92,6 +93,9 @@ const postSlice = createSlice({
     },
     setPostStatus(state, action) {
       state.createPostInProgress = action.payload
+    },
+    setCachedSearchTerm(state, action) {
+      state.searchTerm = action.payload
     }
   },
 
@@ -107,5 +111,5 @@ const postSlice = createSlice({
   }
 })
 
-export const { setAllPosts } = postSlice.actions
+export const { setAllPosts, setCachedSearchTerm } = postSlice.actions
 export default postSlice.reducer

@@ -1,6 +1,7 @@
 import express from "express";
 import PostsController from "../controllers/posts.controller.js";
 import validateData from "../middlewares/validation.middleware.js";
+import authenticateUser from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

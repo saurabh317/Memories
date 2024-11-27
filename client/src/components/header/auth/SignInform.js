@@ -52,6 +52,7 @@ const SignInForm = ({ setShowSignUpModal, setShowSignInModal }) => {
   const submitHandler = async() => {
     // send a post request and register the user to the db
     const URL = `${BASE_URL}/user/signIn`
+    debugger
     const response = await fetch(URL, {
       method: 'POST',
       headers: {
